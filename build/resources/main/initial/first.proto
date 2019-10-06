@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package initial;
+
+option java_package = "com.proto.initial";
+option java_multiple_files = true;
+
+message DummyMessage {}
+
+service DummyService {}
