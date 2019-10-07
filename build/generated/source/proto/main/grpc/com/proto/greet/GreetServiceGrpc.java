@@ -120,6 +120,37 @@ public final class GreetServiceGrpc {
     return getGreetManyClientMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.proto.greet.GreetRequest,
+      com.proto.greet.GreetResponse> getGreetBiClientMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GreetBiClient",
+      requestType = com.proto.greet.GreetRequest.class,
+      responseType = com.proto.greet.GreetResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+  public static io.grpc.MethodDescriptor<com.proto.greet.GreetRequest,
+      com.proto.greet.GreetResponse> getGreetBiClientMethod() {
+    io.grpc.MethodDescriptor<com.proto.greet.GreetRequest, com.proto.greet.GreetResponse> getGreetBiClientMethod;
+    if ((getGreetBiClientMethod = GreetServiceGrpc.getGreetBiClientMethod) == null) {
+      synchronized (GreetServiceGrpc.class) {
+        if ((getGreetBiClientMethod = GreetServiceGrpc.getGreetBiClientMethod) == null) {
+          GreetServiceGrpc.getGreetBiClientMethod = getGreetBiClientMethod =
+              io.grpc.MethodDescriptor.<com.proto.greet.GreetRequest, com.proto.greet.GreetResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GreetBiClient"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.proto.greet.GreetRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.proto.greet.GreetResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new GreetServiceMethodDescriptorSupplier("GreetBiClient"))
+              .build();
+        }
+      }
+    }
+    return getGreetBiClientMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -158,6 +189,9 @@ public final class GreetServiceGrpc {
     }
 
     /**
+     * <pre>
+     *server Stream
+     * </pre>
      */
     public void greetManyTime(com.proto.greet.GreetManyRequest request,
         io.grpc.stub.StreamObserver<com.proto.greet.GreetmanyResponse> responseObserver) {
@@ -165,10 +199,23 @@ public final class GreetServiceGrpc {
     }
 
     /**
+     * <pre>
+     *client Stream
+     * </pre>
      */
     public io.grpc.stub.StreamObserver<com.proto.greet.GreetRequest> greetManyClient(
         io.grpc.stub.StreamObserver<com.proto.greet.GreetResponse> responseObserver) {
       return asyncUnimplementedStreamingCall(getGreetManyClientMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     *bi-directional  Stream
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<com.proto.greet.GreetRequest> greetBiClient(
+        io.grpc.stub.StreamObserver<com.proto.greet.GreetResponse> responseObserver) {
+      return asyncUnimplementedStreamingCall(getGreetBiClientMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
@@ -194,6 +241,13 @@ public final class GreetServiceGrpc {
                 com.proto.greet.GreetRequest,
                 com.proto.greet.GreetResponse>(
                   this, METHODID_GREET_MANY_CLIENT)))
+          .addMethod(
+            getGreetBiClientMethod(),
+            asyncBidiStreamingCall(
+              new MethodHandlers<
+                com.proto.greet.GreetRequest,
+                com.proto.greet.GreetResponse>(
+                  this, METHODID_GREET_BI_CLIENT)))
           .build();
     }
   }
@@ -228,6 +282,9 @@ public final class GreetServiceGrpc {
     }
 
     /**
+     * <pre>
+     *server Stream
+     * </pre>
      */
     public void greetManyTime(com.proto.greet.GreetManyRequest request,
         io.grpc.stub.StreamObserver<com.proto.greet.GreetmanyResponse> responseObserver) {
@@ -236,11 +293,25 @@ public final class GreetServiceGrpc {
     }
 
     /**
+     * <pre>
+     *client Stream
+     * </pre>
      */
     public io.grpc.stub.StreamObserver<com.proto.greet.GreetRequest> greetManyClient(
         io.grpc.stub.StreamObserver<com.proto.greet.GreetResponse> responseObserver) {
       return asyncClientStreamingCall(
           getChannel().newCall(getGreetManyClientMethod(), getCallOptions()), responseObserver);
+    }
+
+    /**
+     * <pre>
+     *bi-directional  Stream
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<com.proto.greet.GreetRequest> greetBiClient(
+        io.grpc.stub.StreamObserver<com.proto.greet.GreetResponse> responseObserver) {
+      return asyncBidiStreamingCall(
+          getChannel().newCall(getGreetBiClientMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -273,6 +344,9 @@ public final class GreetServiceGrpc {
     }
 
     /**
+     * <pre>
+     *server Stream
+     * </pre>
      */
     public java.util.Iterator<com.proto.greet.GreetmanyResponse> greetManyTime(
         com.proto.greet.GreetManyRequest request) {
@@ -314,6 +388,7 @@ public final class GreetServiceGrpc {
   private static final int METHODID_GREET = 0;
   private static final int METHODID_GREET_MANY_TIME = 1;
   private static final int METHODID_GREET_MANY_CLIENT = 2;
+  private static final int METHODID_GREET_BI_CLIENT = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -352,6 +427,9 @@ public final class GreetServiceGrpc {
       switch (methodId) {
         case METHODID_GREET_MANY_CLIENT:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.greetManyClient(
+              (io.grpc.stub.StreamObserver<com.proto.greet.GreetResponse>) responseObserver);
+        case METHODID_GREET_BI_CLIENT:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.greetBiClient(
               (io.grpc.stub.StreamObserver<com.proto.greet.GreetResponse>) responseObserver);
         default:
           throw new AssertionError();
@@ -407,6 +485,7 @@ public final class GreetServiceGrpc {
               .addMethod(getGreetMethod())
               .addMethod(getGreetManyTimeMethod())
               .addMethod(getGreetManyClientMethod())
+              .addMethod(getGreetBiClientMethod())
               .build();
         }
       }

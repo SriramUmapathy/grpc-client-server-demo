@@ -128,4 +128,66 @@ public class GreetingClient {
 
     }
 
+
+    public static void greetBiClient(){
+
+        GreetServiceGrpc.GreetServiceStub client = GreetServiceGrpc.newStub(managedChannel);
+
+        CountDownLatch latch = new CountDownLatch(1);
+
+        StreamObserver<GreetRequest> resp = client.greetBiClient(new StreamObserver<GreetResponse>() {
+            @Override
+            public void onNext(GreetResponse value) {
+                System.out.println(value.getResult());
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+                latch.countDown();
+            }
+        });
+
+        resp.onNext(
+                GreetRequest.newBuilder().setGreeting(
+                        Greeting.newBuilder().setFirstName("palani").setLastName("sriram").build()
+                )
+                        .build());
+
+        resp.onNext(
+                GreetRequest.newBuilder().setGreeting(
+                        Greeting.newBuilder().setFirstName("palani").setLastName("sriram1").build()
+                )
+                        .build());
+
+        resp.onNext(
+                GreetRequest.newBuilder().setGreeting(
+                        Greeting.newBuilder().setFirstName("palani").setLastName("sriram2").build()
+                )
+                        .build());
+
+        resp.onNext(
+                GreetRequest.newBuilder().setGreeting(
+                        Greeting.newBuilder().setFirstName("palani").setLastName("sriram3").build()
+                )
+                        .build());
+
+        resp.onNext(
+                GreetRequest.newBuilder().setGreeting(
+                        Greeting.newBuilder().setFirstName("palani").setLastName("sriram5").build()
+                )
+                        .build());
+
+        resp.onCompleted();
+
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

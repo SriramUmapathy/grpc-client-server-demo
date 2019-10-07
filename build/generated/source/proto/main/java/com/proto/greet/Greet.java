@@ -54,13 +54,14 @@ public final class Greet {
       "Greeting\"\037\n\rGreetResponse\022\016\n\006result\030\001 \001(" +
       "\t\"5\n\020GreetManyRequest\022!\n\010greeting\030\001 \001(\0132" +
       "\017.greet.Greeting\"#\n\021GreetmanyResponse\022\016\n" +
-      "\006result\030\001 \001(\t2\316\001\n\014GreetService\0224\n\005Greet\022" +
+      "\006result\030\001 \001(\t2\220\002\n\014GreetService\0224\n\005Greet\022" +
       "\023.greet.GreetRequest\032\024.greet.GreetRespon" +
       "se\"\000\022F\n\rGreetManyTime\022\027.greet.GreetManyR" +
       "equest\032\030.greet.GreetmanyResponse\"\0000\001\022@\n\017" +
       "GreetManyClient\022\023.greet.GreetRequest\032\024.g" +
-      "reet.GreetResponse\"\000(\001B\023\n\017com.proto.gree" +
-      "tP\001b\006proto3"
+      "reet.GreetResponse\"\000(\001\022@\n\rGreetBiClient\022" +
+      "\023.greet.GreetRequest\032\024.greet.GreetRespon" +
+      "se\"\000(\0010\001B\023\n\017com.proto.greetP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

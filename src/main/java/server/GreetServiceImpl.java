@@ -3,6 +3,8 @@ package server;
 import com.proto.greet.*;
 import io.grpc.stub.StreamObserver;
 
+import java.util.concurrent.CountDownLatch;
+
 public class GreetServiceImpl extends GreetServiceGrpc.GreetServiceImplBase {
 
     //unary
@@ -68,6 +70,31 @@ public class GreetServiceImpl extends GreetServiceGrpc.GreetServiceImplBase {
             public void onCompleted() {
 
                 responseObserver.onNext(GreetResponse.newBuilder().setResult(resp).build());
+                responseObserver.onCompleted();
+            }
+        };
+
+        return request;
+    }
+
+    @Override
+    public StreamObserver<GreetRequest> greetBiClient(StreamObserver<GreetResponse> responseObserver) {
+
+        StreamObserver<GreetRequest> request = new StreamObserver<GreetRequest>() {
+            @Override
+            public void onNext(GreetRequest value) {
+
+                responseObserver.onNext(GreetResponse.newBuilder().setResult(value.getGreeting().getFirstName()+" - "+value.getGreeting().getLastName()).build());
+
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onCompleted() {
                 responseObserver.onCompleted();
             }
         };

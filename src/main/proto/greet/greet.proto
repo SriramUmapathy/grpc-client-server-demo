@@ -31,7 +31,12 @@ service GreetService {
     //Unary
     rpc Greet(GreetRequest) returns (GreetResponse) {};
 
+    //server Stream
     rpc GreetManyTime(GreetManyRequest) returns (stream GreetmanyResponse) {};
 
+    //client Stream
     rpc GreetManyClient(stream GreetRequest) returns (GreetResponse) {};
+
+    //bi-directional  Stream
+    rpc GreetBiClient(stream GreetRequest) returns (stream GreetResponse) {};
 }
