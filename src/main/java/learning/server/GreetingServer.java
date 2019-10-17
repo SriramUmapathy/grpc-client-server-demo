@@ -1,4 +1,4 @@
-package server;
+package learning.server;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -23,7 +23,7 @@ public class GreetingServer {
 
             System.out.println("Received Shutdown Request");
             server.shutdown();
-            System.out.println("Successfully stopper the server");
+            System.out.println("Successfully stopper the learning.server");
 
         }));
 

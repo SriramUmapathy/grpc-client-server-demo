@@ -1,4 +1,4 @@
-package client;
+package learning.client;
 
 import com.proto.calculator.AddServiceGrpc;
 import com.proto.calculator.Calculator;
@@ -19,18 +19,20 @@ public class GreetingClient {
     static ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost",50051).usePlaintext().build();
 
     public static void main(String[] args) {
-        System.out.println("Hello i am a Grpc client");
+        System.out.println("Hello i am a Grpc learning.client");
         //unary
-//        greetRequest();
-//        addRequest();
+        greetRequest();
+        addRequest();
 
         //serverStream
-//        greetMany();
-//        prime();
+        greetMany();
+        prime();
 
         //clientStream
         clientSteam();
-        //biDirectionalStream
+
+        //biDirectional Stream
+        greetBiClient();
 
 
 
@@ -61,7 +63,7 @@ public class GreetingClient {
         System.out.println(response.getResp());
 
     }
-    //server stream
+    //learning.server stream
     public static void greetMany(){
 
         GreetServiceGrpc.GreetServiceBlockingStub syncGreetClient = GreetServiceGrpc.newBlockingStub(managedChannel);

@@ -1,4 +1,4 @@
-package server;
+package learning.server;
 
 import com.proto.prime.PrimeRequest;
 import com.proto.prime.PrimeResponse;

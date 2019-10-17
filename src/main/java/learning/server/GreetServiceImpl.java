@@ -1,9 +1,7 @@
-package server;
+package learning.server;
 
 import com.proto.greet.*;
 import io.grpc.stub.StreamObserver;
-
-import java.util.concurrent.CountDownLatch;
 
 public class GreetServiceImpl extends GreetServiceGrpc.GreetServiceImplBase {
 
@@ -22,7 +20,7 @@ public class GreetServiceImpl extends GreetServiceGrpc.GreetServiceImplBase {
         responseObserver.onCompleted();
     }
 
-    //server streaming
+    //learning.server streaming
     @Override
     public void greetManyTime(GreetManyRequest request, StreamObserver<GreetmanyResponse> responseObserver) {
 
@@ -56,7 +54,7 @@ public class GreetServiceImpl extends GreetServiceGrpc.GreetServiceImplBase {
             String resp = "";
             @Override
             public void onNext(GreetRequest value) {
-                System.out.println("client sent message");
+                System.out.println("learning.client sent message");
                 resp+="hi "+ value.getGreeting().getFirstName()+"  "+value.getGreeting().getLastName()+", ";
 
             }

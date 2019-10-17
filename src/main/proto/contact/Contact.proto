@@ -1,0 +1,38 @@
+
+syntax = "proto3";
+
+package contact;
+
+// language- and platform-neutral open source RPC system developed at Google
+//it's also possible to use protocol buffers with your own RPC implementation
+option java_package = "com.proto.contact";
+option java_multiple_files = true;
+
+message Contact {
+
+    string first_name = 1;
+    string last_name = 2;
+    string email = 3;
+    string number = 4;
+
+}
+
+message ContactRequest {
+    Contact contact = 1;
+}
+
+message ContactResponse {
+    Contact contact = 1;
+}
+
+service ContactService {
+
+    rpc unaryContact(ContactRequest) returns (ContactResponse) {};
+
+    rpc clientStreamContact(ContactRequest) returns (ContactResponse) {};
+
+    rpc serverStreamContact(ContactRequest) returns (ContactResponse) {};
+
+    rpc biDirectionalStreamContact(ContactRequest) returns (ContactResponse) {};
+
+}

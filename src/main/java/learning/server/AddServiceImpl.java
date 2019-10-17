@@ -1,4 +1,4 @@
-package server;
+package learning.server;
 
 import com.proto.calculator.AddServiceGrpc;
 import com.proto.calculator.Calculator;
