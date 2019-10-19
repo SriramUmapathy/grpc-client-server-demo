@@ -25,14 +25,22 @@ message ContactResponse {
     Contact contact = 1;
 }
 
+message Filter {
+    string first_name = 1;
+}
+
+message Status {
+    string status = 1;
+}
+
 service ContactService {
 
     rpc unaryContact(ContactRequest) returns (ContactResponse) {};
 
-    rpc clientStreamContact(ContactRequest) returns (ContactResponse) {};
+    rpc serverStreamContact(Filter) returns (stream ContactResponse) {};
 
-    rpc serverStreamContact(ContactRequest) returns (ContactResponse) {};
+    rpc clientStreamContact(stream ContactRequest) returns (Status) {};
 
-    rpc biDirectionalStreamContact(ContactRequest) returns (ContactResponse) {};
+    rpc biDirectionalStreamContact(stream ContactRequest) returns (stream ContactResponse) {};
 
 }

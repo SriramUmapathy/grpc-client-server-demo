@@ -26,7 +26,7 @@ option java_package = "com.google.api";
 // have many consumer projects, and the service may want to behave differently
 // depending on some properties on the project. For example, a project may be
 // associated with a school, or a business, or a government agency, a business
-// type property on the project may affect how a service responds to the client.
+// type property on the project may affect how a service responds to the learning.client.
 // This descriptor defines which properties are allowed to be set on a project.
 //
 // Example:

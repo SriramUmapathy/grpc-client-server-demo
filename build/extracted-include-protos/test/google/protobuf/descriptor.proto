@@ -276,9 +276,9 @@ message MethodDescriptorProto {
 
   optional MethodOptions options = 4;
 
-  // Identifies if client streams multiple client messages
+  // Identifies if learning.client streams multiple learning.client messages
   optional bool client_streaming = 5 [default = false];
-  // Identifies if server streams multiple server messages
+  // Identifies if learning.server streams multiple learning.server messages
   optional bool server_streaming = 6 [default = false];
 }
 

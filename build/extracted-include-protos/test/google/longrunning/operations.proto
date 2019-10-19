@@ -32,15 +32,15 @@ option php_namespace = "Google\\LongRunning";
 // Manages long-running operations with an API service.
 //
 // When an API method normally takes long time to complete, it can be designed
-// to return [Operation][google.longrunning.Operation] to the client, and the client can use this
+// to return [Operation][google.longrunning.Operation] to the learning.client, and the learning.client can use this
 // interface to receive the real response asynchronously by polling the
 // operation resource, or pass the operation resource to another API (such as
 // Google Cloud Pub/Sub API) to receive the response.  Any API service that
 // returns long-running operations should implement the `Operations` interface
-// so developers can have a consistent client experience.
+// so developers can have a consistent learning.client experience.
 service Operations {
   // Lists operations that match the specified filter in the request. If the
-  // server doesn't support this method, it returns `UNIMPLEMENTED`.
+  // learning.server doesn't support this method, it returns `UNIMPLEMENTED`.
   //
   // NOTE: the `name` binding below allows API services to override the binding
   // to use different resource name schemes, such as `users/*/operations`.
@@ -55,17 +55,17 @@ service Operations {
     option (google.api.http) = { get: "/v1/{name=operations/**}" };
   }
 
-  // Deletes a long-running operation. This method indicates that the client is
+  // Deletes a long-running operation. This method indicates that the learning.client is
   // no longer interested in the operation result. It does not cancel the
-  // operation. If the server doesn't support this method, it returns
+  // operation. If the learning.server doesn't support this method, it returns
   // `google.rpc.Code.UNIMPLEMENTED`.
   rpc DeleteOperation(DeleteOperationRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = { delete: "/v1/{name=operations/**}" };
   }
 
-  // Starts asynchronous cancellation on a long-running operation.  The server
+  // Starts asynchronous cancellation on a long-running operation.  The learning.server
   // makes a best effort to cancel the operation, but success is not
-  // guaranteed.  If the server doesn't support this method, it returns
+  // guaranteed.  If the learning.server doesn't support this method, it returns
   // `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
   // [Operations.GetOperation][google.longrunning.Operations.GetOperation] or
   // other methods to check whether the cancellation succeeded or whether the
@@ -81,7 +81,7 @@ service Operations {
 // This resource represents a long-running operation that is the result of a
 // network API call.
 message Operation {
-  // The server-assigned name, which is only unique within the same service that
+  // The learning.server-assigned name, which is only unique within the same service that
   // originally returns it. If you use the default HTTP mapping, the
   // `name` should have the format of `operations/some/unique/name`.
   string name = 1;

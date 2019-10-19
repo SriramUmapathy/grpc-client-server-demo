@@ -83,12 +83,12 @@ message MetricDescriptor {
   // grouping. For example:
   //
   //     "custom.googleapis.com/invoice/paid/amount"
-  //     "appengine.googleapis.com/http/server/response_latencies"
+  //     "appengine.googleapis.com/http/learning.server/response_latencies"
   string type = 8;
 
   // The set of labels that can be used to describe a specific
   // instance of this metric type. For example, the
-  // `appengine.googleapis.com/http/server/response_latencies` metric
+  // `appengine.googleapis.com/http/learning.server/response_latencies` metric
   // type has a label for the HTTP response code, `response_code`, so
   // you can look at latencies for successful responses or just
   // for responses that failed.

@@ -50,7 +50,7 @@ enum Code {
   // HTTP Mapping: 500 Internal Server Error
   UNKNOWN = 2;
 
-  // The client specified an invalid argument.  Note that this differs
+  // The learning.client specified an invalid argument.  Note that this differs
   // from `FAILED_PRECONDITION`.  `INVALID_ARGUMENT` indicates arguments
   // that are problematic regardless of the state of the system
   // (e.g., a malformed file name).
@@ -61,7 +61,7 @@ enum Code {
   // The deadline expired before the operation could complete. For operations
   // that change the state of the system, this error may be returned
   // even if the operation has completed successfully.  For example, a
-  // successful response from a server could have been delayed long
+  // successful response from a learning.server could have been delayed long
   // enough for the deadline to expire.
   //
   // HTTP Mapping: 504 Gateway Timeout
@@ -69,7 +69,7 @@ enum Code {
 
   // Some requested entity (e.g., file or directory) was not found.
   //
-  // Note to server developers: if a request is denied for an entire class
+  // Note to learning.server developers: if a request is denied for an entire class
   // of users, such as gradual feature rollout or undocumented whitelist,
   // `NOT_FOUND` may be used. If a request is denied for some users within
   // a class of users, such as user-based access control, `PERMISSION_DENIED`
@@ -78,7 +78,7 @@ enum Code {
   // HTTP Mapping: 404 Not Found
   NOT_FOUND = 5;
 
-  // The entity that a client attempted to create (e.g., file or directory)
+  // The entity that a learning.client attempted to create (e.g., file or directory)
   // already exists.
   //
   // HTTP Mapping: 409 Conflict
@@ -115,14 +115,14 @@ enum Code {
   //
   // Service implementors can use the following guidelines to decide
   // between `FAILED_PRECONDITION`, `ABORTED`, and `UNAVAILABLE`:
-  //  (a) Use `UNAVAILABLE` if the client can retry just the failing call.
-  //  (b) Use `ABORTED` if the client should retry at a higher level
-  //      (e.g., when a client-specified test-and-set fails, indicating the
-  //      client should restart a read-modify-write sequence).
-  //  (c) Use `FAILED_PRECONDITION` if the client should not retry until
+  //  (a) Use `UNAVAILABLE` if the learning.client can retry just the failing call.
+  //  (b) Use `ABORTED` if the learning.client should retry at a higher level
+  //      (e.g., when a learning.client-specified test-and-set fails, indicating the
+  //      learning.client should restart a read-modify-write sequence).
+  //  (c) Use `FAILED_PRECONDITION` if the learning.client should not retry until
   //      the system state has been explicitly fixed.  E.g., if an "rmdir"
   //      fails because the directory is non-empty, `FAILED_PRECONDITION`
-  //      should be returned since the client should not retry unless
+  //      should be returned since the learning.client should not retry unless
   //      the files are deleted from the directory.
   //
   // HTTP Mapping: 400 Bad Request

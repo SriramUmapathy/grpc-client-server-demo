@@ -48,7 +48,7 @@ message DebugInfo {
   // The stack trace entries indicating where the error occurred.
   repeated string stack_entries = 1;
 
-  // Additional debugging information provided by the server.
+  // Additional debugging information provided by the learning.server.
   string detail = 2;
 }
 
@@ -68,7 +68,7 @@ message QuotaFailure {
   // daily quota or a custom quota that was exceeded.
   message Violation {
     // The subject on which the quota check failed.
-    // For example, "clientip:<ip address of client>" or "project:<Google
+    // For example, "clientip:<ip address of learning.client>" or "project:<Google
     // developer project id>".
     string subject = 1;
 
@@ -115,7 +115,7 @@ message PreconditionFailure {
   repeated Violation violations = 1;
 }
 
-// Describes violations in a client request. This error type focuses on the
+// Describes violations in a learning.client request. This error type focuses on the
 // syntactic aspects of the request.
 message BadRequest {
   // A message type used to describe a single bad request field.
@@ -129,7 +129,7 @@ message BadRequest {
     string description = 2;
   }
 
-  // Describes all violations in a client request.
+  // Describes all violations in a learning.client request.
   repeated FieldViolation field_violations = 1;
 }
 

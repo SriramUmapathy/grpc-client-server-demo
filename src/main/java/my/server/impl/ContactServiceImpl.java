@@ -1,9 +1,6 @@
 package my.server.impl;
 
-import com.proto.contact.Contact;
-import com.proto.contact.ContactRequest;
-import com.proto.contact.ContactResponse;
-import com.proto.contact.ContactServiceGrpc;
+import com.proto.contact.*;
 import io.grpc.stub.StreamObserver;
 
 import java.util.ArrayList;
@@ -12,6 +9,7 @@ import java.util.List;
 public class ContactServiceImpl extends ContactServiceGrpc.ContactServiceImplBase {
 
     private static List<Contact> contacts = new ArrayList<>();
+
 
     @Override
     public void unaryContact(ContactRequest request, StreamObserver<ContactResponse> responseObserver) {
@@ -29,18 +27,78 @@ public class ContactServiceImpl extends ContactServiceGrpc.ContactServiceImplBas
     }
 
     @Override
-    public void clientStreamContact(ContactRequest request, StreamObserver<ContactResponse> responseObserver) {
-        super.clientStreamContact(request, responseObserver);
+    public void serverStreamContact(Filter request, StreamObserver<ContactResponse> responseObserver) {
+
+        String name = request.getFirstName();
+        try {
+          for(Contact contact : contacts) {
+              if(contact.getFirstName().equals(name))
+                  responseObserver.onNext(ContactResponse.newBuilder().setContact(contact).build());
+          }
+        } catch (Exception e) {
+           System.err.println(e.getMessage());
+        } finally {
+            responseObserver.onCompleted();
+        }
+
     }
 
     @Override
-    public void serverStreamContact(ContactRequest request, StreamObserver<ContactResponse> responseObserver) {
-        super.serverStreamContact(request, responseObserver);
+    public StreamObserver<ContactRequest> clientStreamContact(StreamObserver<Status> responseObserver) {
+
+        StreamObserver<ContactRequest> request = new StreamObserver<ContactRequest>() {
+            @Override
+            public void onNext(ContactRequest value) {
+                Contact contact =value.getContact();
+                contacts.add(contact);
+
+                System.out.println("First Name = "+contact.getFirstName() +", Last Name = "+contact.getLastName()+", Email = "+contact.getEmail());
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onNext(Status.newBuilder().setStatus("Successs").build());
+                responseObserver.onCompleted();
+            }
+        };
+
+        return request;
     }
 
     @Override
-    public void biDirectionalStreamContact(ContactRequest request, StreamObserver<ContactResponse> responseObserver) {
-        super.biDirectionalStreamContact(request, responseObserver);
+    public StreamObserver<ContactRequest> biDirectionalStreamContact(StreamObserver<ContactResponse> responseObserver) {
+
+        StreamObserver<ContactRequest> request = new StreamObserver<ContactRequest>() {
+            @Override
+            public void onNext(ContactRequest value) {
+
+                Contact contact =value.getContact();
+                contacts.add(contact);
+
+                System.out.println("First Name = "+contact.getFirstName() +", Last Name = "+contact.getLastName()+", Email = "+contact.getEmail());
+
+                responseObserver.onNext(ContactResponse.newBuilder().setContact(contact).build());
+
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onCompleted();
+            }
+        };
+
+        return request;
     }
+
 
 }

@@ -190,7 +190,7 @@ public final class GreetServiceGrpc {
 
     /**
      * <pre>
-     *server Stream
+     *learning.server Stream
      * </pre>
      */
     public void greetManyTime(com.proto.greet.GreetManyRequest request,
@@ -200,7 +200,7 @@ public final class GreetServiceGrpc {
 
     /**
      * <pre>
-     *client Stream
+     *learning.client Stream
      * </pre>
      */
     public io.grpc.stub.StreamObserver<com.proto.greet.GreetRequest> greetManyClient(
@@ -283,7 +283,7 @@ public final class GreetServiceGrpc {
 
     /**
      * <pre>
-     *server Stream
+     *learning.server Stream
      * </pre>
      */
     public void greetManyTime(com.proto.greet.GreetManyRequest request,
@@ -294,7 +294,7 @@ public final class GreetServiceGrpc {
 
     /**
      * <pre>
-     *client Stream
+     *learning.client Stream
      * </pre>
      */
     public io.grpc.stub.StreamObserver<com.proto.greet.GreetRequest> greetManyClient(
@@ -345,7 +345,7 @@ public final class GreetServiceGrpc {
 
     /**
      * <pre>
-     *server Stream
+     *learning.server Stream
      * </pre>
      */
     public java.util.Iterator<com.proto.greet.GreetmanyResponse> greetManyTime(

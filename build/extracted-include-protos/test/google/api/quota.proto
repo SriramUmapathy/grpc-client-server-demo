@@ -137,7 +137,7 @@ message QuotaLimit {
   string description = 2;
 
   // Default number of tokens that can be consumed during the specified
-  // duration. This is the number of tokens assigned when a client
+  // duration. This is the number of tokens assigned when a learning.client
   // application developer activates the service for his/her project.
   //
   // Specifying a value of 0 will block all requests. This can be used if you
