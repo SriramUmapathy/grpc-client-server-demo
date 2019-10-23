@@ -29,6 +29,12 @@ public class ContactClient {
     }
 
     private void serverStreamClient(){
+        ContactServiceGrpc.ContactServiceBlockingStub request = ContactServiceGrpc.newBlockingStub(managedChannel);
+
+
+        request.serverStreamContact(Filter.newBuilder().setFirstName("sri").build()).forEachRemaining(response -> {
+            System.out.println(response.getContact().getFirstName()+"  "+response.getContact().getLastName()+"  "+response.getContact().getEmail()+"  "+response.getContact().getNumber());
+        });
 
     }
 
