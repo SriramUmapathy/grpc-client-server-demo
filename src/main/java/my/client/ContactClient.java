@@ -14,6 +14,14 @@ public class ContactClient {
 
     public static void main(String ar[]) {
         ContactClient contactClient = new ContactClient();
+
+        contactClient.unaryClient();
+
+        contactClient.clientStreamClient();
+
+        contactClient.serverStreamClient();
+
+        contactClient.biDiStreamClient();
     }
 
     private void unaryClient(){
@@ -76,6 +84,43 @@ public class ContactClient {
     }
 
     private void biDiStreamClient(){
+
+        ContactServiceGrpc.ContactServiceStub request = ContactServiceGrpc.newStub(managedChannel);
+
+        CountDownLatch latch = new CountDownLatch(1);
+        StreamObserver<ContactRequest> req = request.biDirectionalStreamContact(new StreamObserver<ContactResponse>() {
+            @Override
+            public void onNext(ContactResponse response) {
+
+                System.out.println(response.getContact().getFirstName()+"  "+response.getContact().getLastName()+"  "+response.getContact().getEmail()+"  "+response.getContact().getNumber());
+
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+                latch.countDown();
+            }
+        });
+
+
+        for(int i= 0; i < 10; i++) {
+            Contact contact = Contact.newBuilder().setFirstName("sriram").setLastName(""+i).setEmail("palanisriram@gmail.com").setNumber("9840676684").build();
+
+            ContactRequest contactRequest = ContactRequest.newBuilder().setContact(contact).build();
+            req.onNext(contactRequest);
+        }
+        req.onCompleted();
+
+        try{
+            latch.await();
+        }catch (InterruptedException e) {
+            System.err.println(e.getMessage());
+        }
 
     }
 
