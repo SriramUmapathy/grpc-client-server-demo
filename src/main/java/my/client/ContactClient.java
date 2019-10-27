@@ -4,7 +4,6 @@ import com.proto.contact.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
-import my.server.ContactServer;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -25,6 +24,9 @@ public class ContactClient {
     }
 
     private void unaryClient(){
+
+        System.out.println("Unary");
+
         ContactServiceGrpc.ContactServiceBlockingStub request = ContactServiceGrpc.newBlockingStub(managedChannel);
 
         Contact contact = Contact.newBuilder().setFirstName("sriram").setLastName("umapathy").setEmail("palanisriram@gmail.com").setNumber("9840676684").build();
@@ -37,6 +39,9 @@ public class ContactClient {
     }
 
     private void serverStreamClient(){
+
+        System.out.println("Server Stream");
+
         ContactServiceGrpc.ContactServiceBlockingStub request = ContactServiceGrpc.newBlockingStub(managedChannel);
 
 
@@ -47,6 +52,8 @@ public class ContactClient {
     }
 
     private void clientStreamClient(){
+
+        System.out.println("Client Stream");
         ContactServiceGrpc.ContactServiceStub request = ContactServiceGrpc.newStub(managedChannel);
 
         CountDownLatch latch = new CountDownLatch(1);
@@ -84,6 +91,8 @@ public class ContactClient {
     }
 
     private void biDiStreamClient(){
+
+        System.out.println("Bi-directional Stream");
 
         ContactServiceGrpc.ContactServiceStub request = ContactServiceGrpc.newStub(managedChannel);
 

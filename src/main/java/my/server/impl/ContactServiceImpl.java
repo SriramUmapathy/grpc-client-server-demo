@@ -13,7 +13,7 @@ public class ContactServiceImpl extends ContactServiceGrpc.ContactServiceImplBas
 
     @Override
     public void unaryContact(ContactRequest request, StreamObserver<ContactResponse> responseObserver) {
-
+        System.out.println("Unary server");
         Contact contact =request.getContact();
         contacts.add(contact);
 
@@ -29,10 +29,12 @@ public class ContactServiceImpl extends ContactServiceGrpc.ContactServiceImplBas
     @Override
     public void serverStreamContact(Filter request, StreamObserver<ContactResponse> responseObserver) {
 
+        System.out.println("Server Stream server");
+
         String name = request.getFirstName();
         try {
           for(Contact contact : contacts) {
-              if(contact.getFirstName().equals(name))
+//              if(contact.getFirstName().equals(name))
                   responseObserver.onNext(ContactResponse.newBuilder().setContact(contact).build());
           }
         } catch (Exception e) {
@@ -45,6 +47,8 @@ public class ContactServiceImpl extends ContactServiceGrpc.ContactServiceImplBas
 
     @Override
     public StreamObserver<ContactRequest> clientStreamContact(StreamObserver<Status> responseObserver) {
+
+        System.out.println("Client Stream server");
 
         StreamObserver<ContactRequest> request = new StreamObserver<ContactRequest>() {
             @Override
@@ -72,6 +76,8 @@ public class ContactServiceImpl extends ContactServiceGrpc.ContactServiceImplBas
 
     @Override
     public StreamObserver<ContactRequest> biDirectionalStreamContact(StreamObserver<ContactResponse> responseObserver) {
+
+        System.out.println("Bi-directional Stream server");
 
         StreamObserver<ContactRequest> request = new StreamObserver<ContactRequest>() {
             @Override
